@@ -1,0 +1,11 @@
+<%= link_to "Yesterday", other_day_path(current_day, :previous) if current_day %>
+<%= link_to "Next day", other_day_path(current_day, :next) if current_day %>
+
+<ul>
+  <% entries.each do |entry| %>
+    <li>
+      <%= entry.entered_at.to_s(:long) %>
+      <%= entry.value %>
+  </li>
+  <% end %>
+</ul>
