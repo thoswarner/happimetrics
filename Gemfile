@@ -35,4 +35,7 @@ gem "less-rails"
 # layout 
 gem "twitter-bootstrap-rails"
 
+# Enums
+gem 'active_enum'
+
 
