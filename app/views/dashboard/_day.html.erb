@@ -4,6 +4,16 @@
 <h1><%= current_day.strftime("%A, %d %B %Y") %></h1>
 
 <ul>
+
+<% happiness_distribution(current_uid, entries).each_pair do |happiness_value, percentage| %>
+  <li>
+    <%= happiness_value.titleize %>
+    <%= number_to_percentage(percentage, :precision => 0) %>
+  </li>
+<% end %>
+</ul>
+
+<ul>
   <% entries.each do |entry| %>
     <li>
       <%= entry.entered_at.to_s(:time) %>

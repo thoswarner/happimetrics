@@ -19,6 +19,16 @@ class DashboardController < ApplicationController
   end
   helper_method :current_day
 
+  def current_uid
+    @current_uid ||= begin
+      case type
+      when :day
+        uid_for_date(current_day)
+      end
+    end
+  end
+  helper_method :current_uid
+
   def entries
     @entries ||= begin
       case type

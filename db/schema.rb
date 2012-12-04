@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121204194349) do
+ActiveRecord::Schema.define(:version => 20121204211136) do
 
   create_table "happiness_entries", :force => true do |t|
     t.integer  "uid"
@@ -20,6 +20,14 @@ ActiveRecord::Schema.define(:version => 20121204194349) do
     t.integer  "happiness_value"
     t.datetime "created_at",      :null => false
     t.datetime "updated_at",      :null => false
+  end
+
+  create_table "metric_values", :force => true do |t|
+    t.string   "uid"
+    t.text     "description"
+    t.float    "value"
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
   end
 
   create_table "metrics", :force => true do |t|
