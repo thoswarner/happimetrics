@@ -9,6 +9,7 @@ class DashboardController < ApplicationController
   def type
     @type ||= params[:type]
   end
+  helper_method :type
 
   def current_day
     @current_day ||= begin
@@ -23,7 +24,7 @@ class DashboardController < ApplicationController
     @current_uid ||= begin
       case type
       when :day
-        uid_for_date(current_day)
+        uid_for_day(current_day)
       end
     end
   end
