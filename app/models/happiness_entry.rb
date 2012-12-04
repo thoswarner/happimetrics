@@ -44,7 +44,7 @@ class HappinessEntry < ActiveRecord::Base
             entry_date = entered_at.to_date
             entry_time = entered_at.to_time
             uid = entered_at.to_i
-            happiness_entry = self.create(:uid => uid, :entry_date => entry_date, :entry_time => entry_time, :happiness_value => [1,2,3].sample) unless happiness_entry
+            happiness_entry = self.create(:uid => uid, :entry_date => entry_date, :entry_time => entry_time, :happiness_value => [1,1,1,2,3].sample) unless happiness_entry
           end
         end
         date = date + 1.day
