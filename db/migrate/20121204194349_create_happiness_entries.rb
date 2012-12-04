@@ -4,7 +4,7 @@ class CreateHappinessEntries < ActiveRecord::Migration
       t.integer :uid
       t.date :entry_date
       t.time :entry_time
-      t.string :happiness_value
+      t.integer :happiness_value
       t.timestamps
     end
   end

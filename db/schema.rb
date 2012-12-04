@@ -17,7 +17,7 @@ ActiveRecord::Schema.define(:version => 20121204194349) do
     t.integer  "uid"
     t.date     "entry_date"
     t.time     "entry_time"
-    t.string   "happiness_value"
+    t.integer  "happiness_value"
     t.datetime "created_at",      :null => false
     t.datetime "updated_at",      :null => false
   end

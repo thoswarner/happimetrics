@@ -1,4 +1,5 @@
 class HappinessEntry < ActiveRecord::Base
+  default_scope order('entry_date, entry_time ASC')
 
   # attributes
   attr_accessible :uid, :entry_date, :entry_time, :happiness_value
