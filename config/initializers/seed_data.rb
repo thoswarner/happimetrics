@@ -1,1 +1,0 @@
-HappinessEntry.fauxify!

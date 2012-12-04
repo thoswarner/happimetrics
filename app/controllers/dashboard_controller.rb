@@ -23,7 +23,7 @@ class DashboardController < ApplicationController
     @entries ||= begin
       case type
       when :day
-        HappinessEntry.all(:date => current_day)
+        HappinessEntry.on_date(current_day)
       end
     end
   end
