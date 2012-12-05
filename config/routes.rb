@@ -1,9 +1,14 @@
 Happimetrics::Application.routes.draw do
+  get "metric_values/update"
+
   # root dashboard path
   root :to => 'dashboard', :action => 'index'
 
   # metrics administration
   resources :metrics
+
+  # metric values updating
+  post 'metric_values' => "metric_values#update", :as => "metric_values"
 
   # breakdowns
   [:day, :week, :month, :year].each do |type|

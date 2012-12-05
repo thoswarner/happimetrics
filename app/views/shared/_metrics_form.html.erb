@@ -1,0 +1,15 @@
+<%= simple_form_for :metric_values, :url => metric_values_path do |f| %>
+
+  <%= f.input "uid", :input_html => {:value => current_uid} %>
+
+  <% Metric.all_for_type(type).each do |metric| %>
+    <%= f.input "values[#{metric.id}", :as => :string, :label => metric.title, :hint => metric.metric_format %>
+  <% end %>
+
+  <div class="form-actions">
+    <%= f.button :submit, :class => 'btn-primary' %>
+    <%= link_to t('.cancel', :default => t("helpers.links.cancel")),
+                metrics_path, :class => 'btn' %>
+  </div>
+
+<% end %>
