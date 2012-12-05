@@ -26,6 +26,9 @@ gem 'jquery-rails'
 # simple_form for tasty forms
 gem 'simple_form'
 
+# sexy selects
+gem 'chosen-rails'
+
 # inherited resources for sexy controllers
 gem 'inherited_resources'
 

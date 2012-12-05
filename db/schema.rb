@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121205200339) do
+ActiveRecord::Schema.define(:version => 20121205221517) do
 
   create_table "happiness_entries", :force => true do |t|
     t.integer  "uid"
@@ -26,6 +26,20 @@ ActiveRecord::Schema.define(:version => 20121205200339) do
   add_index "happiness_entries", ["entry_time"], :name => "index_happiness_entries_on_entry_time"
   add_index "happiness_entries", ["happiness_value"], :name => "index_happiness_entries_on_happiness_value"
   add_index "happiness_entries", ["uid"], :name => "index_happiness_entries_on_uid"
+
+  create_table "metric_types", :force => true do |t|
+    t.string   "title"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  create_table "metric_types_metrics", :force => true do |t|
+    t.integer "metric_id"
+    t.integer "metric_type_id"
+  end
+
+  add_index "metric_types_metrics", ["metric_id"], :name => "index_metric_types_metrics_on_metric_id"
+  add_index "metric_types_metrics", ["metric_type_id"], :name => "index_metric_types_metrics_on_metric_type_id"
 
   create_table "metric_values", :force => true do |t|
     t.string   "uid"
@@ -42,10 +56,11 @@ ActiveRecord::Schema.define(:version => 20121205200339) do
 
   create_table "metrics", :force => true do |t|
     t.string   "title"
-    t.text     "description", :limit => 255
-    t.datetime "created_at",                 :null => false
-    t.datetime "updated_at",                 :null => false
+    t.text     "description",   :limit => 255
+    t.datetime "created_at",                   :null => false
+    t.datetime "updated_at",                   :null => false
     t.integer  "metric_type"
+    t.integer  "metric_format"
   end
 
 end
