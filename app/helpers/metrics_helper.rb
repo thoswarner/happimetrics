@@ -6,7 +6,8 @@ module MetricsHelper
 
   def average_daily_happiness_distribution happiness_value
     metric_type = "average_day_#{happiness_value}_percentage"
-    MetricValue.find_by_metric_type(metric_type).value
+    metric_value = MetricValue.find_by_metric_type(metric_type)
+    metric_value ? metric_value.value : 0
   end
 
 end

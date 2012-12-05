@@ -1,24 +1,58 @@
+<div class="day">
+  <a href="#" class="shrinker">shrink</a>
+
 <%= link_to "Yesterday", other_day_path(current_day, :previous) if current_day %>
 <%= link_to "Next day", other_day_path(current_day, :next) if current_day %>
 
 <h1><%= current_day.strftime("%A, %d %B %Y") %></h1>
 
-<ul>
-<% happiness_distribution(current_uid, type, entries).each_pair do |happiness_value, percentage| %>
-  <li>
-    <%= happiness_value.titleize %>
-    <%= number_to_percentage(percentage, :precision => 0) %>
-    /
-    <%= number_to_percentage(average_daily_happiness_distribution(happiness_value), :precision => 0) %>
-  </li>
-<% end %>
-</ul>
+<!-- dark green: #274C00
+leaf green: #7F9400
+light green: #D4D34D
+v. light gteen: #EDFFA9
+red: #DB4646 
+creamy: #EFDFBB
+-->
 
-<ul>
-  <% entries.each do |entry| %>
-    <li>
-      <%= entry.entered_at.to_s(:time) %>
-      <%= entry.happiness_value %>
-  </li>
-  <% end %>
-</ul>
+<div class='row-fluid'>
+  <div class='span12'>
+    <ul class='percentage-chart'>
+    <% happiness_distribution(current_uid, type, entries).each_pair do |happiness_value, percentage| %>
+      <li data-percentage="<%= percentage.round %>" data-happiness-value="<%= happiness_value %>">
+        <div class='item-content'>
+          <%= number_to_percentage(percentage, :precision => 0) %>
+        </div>
+      </li>
+    <% end %>
+    </ul>
+  </div>
+</div>
+
+<div class='row-fluid'>
+  <div class='span12'>
+    <ul class='percentage-chart'>
+    <% HappinessValue.all.each do |happiness_value| %>
+      <li data-percentage="<%= average_daily_happiness_distribution(happiness_value[1]).round %>" data-happiness-value="<%= happiness_value[1] %>">
+        <div class='item-content'>
+          <%= number_to_percentage(average_daily_happiness_distribution(happiness_value[1]), :precision => 0) %>
+        </div>
+      </li>
+    <% end %>
+    </ul>
+  </div>
+</div>
+
+<div class='row-fluid'>
+  <div class='span12'>
+    <ul>
+      <% entries.each do |entry| %>
+        <li>
+          <%= entry.entered_at.to_s(:time) %>
+          <%= entry.happiness_value %>
+      </li>
+      <% end %>
+    </ul>
+  </div>
+</div>
+
+</div>

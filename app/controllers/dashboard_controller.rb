@@ -2,10 +2,6 @@ class DashboardController < ApplicationController
   def index
   end
 
-  def show
-    render :partial => type.to_s
-  end
-
   def type
     @type ||= params[:type]
   end
