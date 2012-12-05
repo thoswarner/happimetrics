@@ -16,10 +16,3 @@ jQuery ->
         width: "#{percentage}%"
       item.addClass happiness_value
 
-  $("a.shrinker").on "click", (e) ->
-    e.preventDefault()
-    $("div.day").animate
-      width: 100
-      height: 100
-    , 500
-

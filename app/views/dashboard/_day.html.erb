@@ -1,8 +1,7 @@
 <div class="day">
-  <a href="#" class="shrinker">shrink</a>
 
-<%= link_to "Yesterday", other_day_path(current_day, :previous) if current_day %>
-<%= link_to "Next day", other_day_path(current_day, :next) if current_day %>
+<%= link_to "Yesterday", other_day_path(current_day, :previous), :class => "btn" if current_day %>
+<%= link_to "Next day", other_day_path(current_day, :next), :class => "btn" if current_day %>
 
 <h1><%= current_day.strftime("%A, %d %B %Y") %></h1>
 

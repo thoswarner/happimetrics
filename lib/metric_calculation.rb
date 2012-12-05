@@ -18,27 +18,18 @@ class MetricCalculation
     def update_metric_values!
       update_daily_happiness_distributions!
       update_weekly_happiness_distributions!
-      update_average_daily_happiness_distributions!
-      update_average_weekly_happiness_distributions!
+      update_average_happiness_distributions!
     end
 
-    # update average happiness distribution for every day 
-    def update_average_daily_happiness_distributions!      
-      HappinessValue.names.each do |happiness_value|
-        metric_type = "day_#{happiness_value}_percentage"
-        average_metric_type = "average_#{metric_type}"
-        average_for_value = MetricValue.where(:metric_type => metric_type).average(:value).to_f
-        MetricValue.update(nil, average_metric_type, average_for_value)
-      end
-    end
-
-    # update average happiness distribution for every week 
-    def update_average_weekly_happiness_distributions!      
-      HappinessValue.names.each do |happiness_value|
-        metric_type = "week_#{happiness_value}_percentage"
-        average_metric_type = "average_#{metric_type}"
-        average_for_value = MetricValue.where(:metric_type => metric_type).average(:value).to_f
-        MetricValue.update(nil, average_metric_type, average_for_value)
+    # update average happiness distribution for each type (day, week, month, yeah)
+    def update_average_happiness_distributions!
+      [:day, :week].each do |type|      
+        HappinessValue.names.each do |happiness_value|
+          metric_type = "#{type}_#{happiness_value}_percentage"
+          average_metric_type = "average_#{metric_type}"
+          average_for_value = MetricValue.where(:metric_type => metric_type).average(:value).to_f
+          MetricValue.update(nil, average_metric_type, average_for_value)
+        end
       end
     end
 
