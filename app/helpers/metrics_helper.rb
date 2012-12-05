@@ -1,11 +1,11 @@
 module MetricsHelper
 
-  def happiness_distribution uid, type, entries
-    MetricCalculation.happiness_distribution(uid, type, entries)
+  def happiness_distribution uid, type
+    MetricCalculation.happiness_distribution(uid, type)
   end
 
-  def average_daily_happiness_distribution happiness_value
-    metric_type = "average_day_#{happiness_value}_percentage"
+  def average_happiness_distribution type, happiness_value
+    metric_type = "average_#{type}_#{happiness_value}_percentage"
     metric_value = MetricValue.find_by_metric_type(metric_type)
     metric_value ? metric_value.value : 0
   end

@@ -5,8 +5,11 @@ Happimetrics::Application.routes.draw do
   # metrics administration
   resources :metrics
 
-  # days breakdown
+  # breakdowns
+  # days
   match "/day/:day/:month/:year" => "dashboard#show", :type => :day, :as => "day"
+  # weeks
+  match "/week/:day/:month/:year" => "dashboard#show", :type => :week, :as => "week"
 
 
 end

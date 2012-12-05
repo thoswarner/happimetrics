@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121204222357) do
+ActiveRecord::Schema.define(:version => 20121205200339) do
 
   create_table "happiness_entries", :force => true do |t|
     t.integer  "uid"
@@ -22,6 +22,11 @@ ActiveRecord::Schema.define(:version => 20121204222357) do
     t.datetime "updated_at",      :null => false
   end
 
+  add_index "happiness_entries", ["entry_date"], :name => "index_happiness_entries_on_entry_date"
+  add_index "happiness_entries", ["entry_time"], :name => "index_happiness_entries_on_entry_time"
+  add_index "happiness_entries", ["happiness_value"], :name => "index_happiness_entries_on_happiness_value"
+  add_index "happiness_entries", ["uid"], :name => "index_happiness_entries_on_uid"
+
   create_table "metric_values", :force => true do |t|
     t.string   "uid"
     t.text     "description"
@@ -30,6 +35,10 @@ ActiveRecord::Schema.define(:version => 20121204222357) do
     t.datetime "updated_at",  :null => false
     t.string   "metric_type"
   end
+
+  add_index "metric_values", ["metric_type"], :name => "index_metric_values_on_metric_type"
+  add_index "metric_values", ["uid"], :name => "index_metric_values_on_uid"
+  add_index "metric_values", ["value"], :name => "index_metric_values_on_value"
 
   create_table "metrics", :force => true do |t|
     t.string   "title"

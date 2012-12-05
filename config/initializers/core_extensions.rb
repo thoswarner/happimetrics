@@ -3,15 +3,19 @@ module Happimetrics
     module Object
 
       def uid_for_day date
-        date.strftime("%d-%m-%Y")
+        date.strftime("day-%d-%m-%Y")
+      end
+
+      def uid_for_week date
+        date.strftime("week-%d-%m-%Y")
       end
 
       def uid_for_month date
-        date.strftime("%m-%Y")
+        date.strftime("month-%m-%Y")
       end
 
       def uid_for_year date
-        date.strftime("%m-%Y")
+        date.strftime("year-%Y")
       end
 
     end

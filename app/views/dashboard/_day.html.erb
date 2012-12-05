@@ -14,34 +14,8 @@ red: #DB4646
 creamy: #EFDFBB
 -->
 
-<div class='row-fluid'>
-  <div class='span12'>
-    <ul class='percentage-chart'>
-    <% happiness_distribution(current_uid, type, entries).each_pair do |happiness_value, percentage| %>
-      <% next if percentage == 0 %>
-      <li data-percentage="<%= percentage %>" data-happiness-value="<%= happiness_value %>">
-        <div class='item-content'>
-          <%= number_to_percentage(percentage, :precision => 2) %>
-        </div>
-      </li>
-    <% end %>
-    </ul>
-  </div>
-</div>
-
-<div class='row-fluid'>
-  <div class='span12'>
-    <ul class='percentage-chart'>
-    <% HappinessValue.all.each do |happiness_value| %>
-      <li data-percentage="<%= average_daily_happiness_distribution(happiness_value[1]) %>" data-happiness-value="<%= happiness_value[1] %>">
-        <div class='item-content'>
-          <%= number_to_percentage(average_daily_happiness_distribution(happiness_value[1]), :precision => 2) %>
-        </div>
-      </li>
-    <% end %>
-    </ul>
-  </div>
-</div>
+<%= render 'shared/happiness_distribution', :uid => current_uid, :type => type %>
+<%= render 'shared/average_happiness_distribution', :type => type %>
 
 <div class='row-fluid'>
   <div class='span12'>

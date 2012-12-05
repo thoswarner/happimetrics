@@ -1,0 +1,14 @@
+<div class='row-fluid'>
+  <div class='span12'>
+    <ul class='percentage-chart'>
+    <% happiness_distribution(uid, type).each_pair do |happiness_value, percentage| %>
+      <% next if percentage == 0 %>
+      <li data-percentage="<%= percentage %>" data-happiness-value="<%= happiness_value %>">
+        <div class='item-content'>
+          <%= number_to_percentage(percentage, :precision => 2) %>
+        </div>
+      </li>
+    <% end %>
+    </ul>
+  </div>
+</div>
