@@ -18,9 +18,10 @@ creamy: #EFDFBB
   <div class='span12'>
     <ul class='percentage-chart'>
     <% happiness_distribution(current_uid, type, entries).each_pair do |happiness_value, percentage| %>
-      <li data-percentage="<%= percentage.round %>" data-happiness-value="<%= happiness_value %>">
+      <% next if percentage == 0 %>
+      <li data-percentage="<%= percentage %>" data-happiness-value="<%= happiness_value %>">
         <div class='item-content'>
-          <%= number_to_percentage(percentage, :precision => 0) %>
+          <%= number_to_percentage(percentage, :precision => 2) %>
         </div>
       </li>
     <% end %>
@@ -32,9 +33,9 @@ creamy: #EFDFBB
   <div class='span12'>
     <ul class='percentage-chart'>
     <% HappinessValue.all.each do |happiness_value| %>
-      <li data-percentage="<%= average_daily_happiness_distribution(happiness_value[1]).round %>" data-happiness-value="<%= happiness_value[1] %>">
+      <li data-percentage="<%= average_daily_happiness_distribution(happiness_value[1]) %>" data-happiness-value="<%= happiness_value[1] %>">
         <div class='item-content'>
-          <%= number_to_percentage(average_daily_happiness_distribution(happiness_value[1]), :precision => 0) %>
+          <%= number_to_percentage(average_daily_happiness_distribution(happiness_value[1]), :precision => 2) %>
         </div>
       </li>
     <% end %>
