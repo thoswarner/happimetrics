@@ -10,6 +10,7 @@ Happimetrics::Application.routes.draw do
   match "/day/:day/:month/:year" => "dashboard#show", :type => :day, :as => "day"
   # weeks
   match "/week/:day/:month/:year" => "dashboard#show", :type => :week, :as => "week"
-
+  # months
+  match "/month/:month/:year" => "dashboard#show", :type => :month, :as => "month"
 
 end
