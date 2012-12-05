@@ -11,6 +11,7 @@ class HappinessEntry < ActiveRecord::Base
   scope :on_date, lambda {|date| where(:entry_date => date)}
   scope :in_week, lambda {|beginning_of_week_day, end_of_week_day| where("entry_date >= ? AND entry_date <= ?", beginning_of_week_day, end_of_week_day)}
   scope :in_month, lambda {|beginning_of_month_day, end_of_month_day| where("entry_date >= ? AND entry_date <= ?", beginning_of_month_day, end_of_month_day)}
+  scope :in_year, lambda {|beginning_of_year_day, end_of_year_day| where("entry_date >= ? AND entry_date <= ?", beginning_of_year_day, end_of_year_day)}
 
   # merged date
   def entered_at
@@ -30,6 +31,10 @@ class HappinessEntry < ActiveRecord::Base
 
     def beginning_of_month_days
       dates.map {|date| date.beginning_of_month }.uniq
+    end
+
+    def beginning_of_year_days
+      dates.map {|date| date.beginning_of_year }.uniq
     end
 
     # create relatively random data for every day in the last 3 months

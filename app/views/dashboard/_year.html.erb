@@ -1,0 +1,25 @@
+<div class="year">
+
+  <%= link_to "Last year", other_year_path(current_beginning_of_year_day, :previous), :class => "btn" if current_beginning_of_year_day %>
+  <%= link_to "Next year", other_year_path(current_beginning_of_year_day, :next), :class => "btn" if current_beginning_of_year_day %>
+
+  <h1><%= current_beginning_of_year_day.strftime("%Y") %></h1>
+
+  <%= render 'shared/happiness_distribution', :uid => current_uid, :type => type %>
+  <%= render 'shared/average_happiness_distribution', :type => type %>
+
+  <div class='row-fluid'>
+    <div class='span12'>
+      <ul>
+        <% entries.each do |entry| %>
+          <li>
+            <%= entry.entry_date.to_s(:short) %>
+            <%= entry.entered_at.to_s(:time) %>
+            <%= entry.happiness_value %>
+        </li>
+        <% end %>
+      </ul>
+    </div>
+  </div>
+
+</div>

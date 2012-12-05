@@ -20,7 +20,7 @@ module DashboardHelper
     week_path(other_week.day, other_week.month, other_week.year)
   end
 
-    def other_month_path beginning_of_month_day, direction
+  def other_month_path beginning_of_month_day, direction
     other_month = case direction
     when :previous
       beginning_of_month_day - 1.month
@@ -28,6 +28,16 @@ module DashboardHelper
       beginning_of_month_day + 1.month
     end
     month_path(other_month.month, other_month.year)
+  end
+
+  def other_year_path beginning_of_year_day, direction
+    other_year = case direction
+    when :previous
+      beginning_of_year_day - 1.year
+    when :next
+      beginning_of_year_day + 1.year
+    end
+    year_path(other_year.year)
   end
 
 end

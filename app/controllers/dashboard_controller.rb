@@ -23,12 +23,6 @@ class DashboardController < ApplicationController
   end
   helper_method :current_beginning_of_week_day
 
-  # A week after current beginning of week day (excluding the following monday)
-  def current_end_of_week_day
-    @current_end_of_week_day ||= current_beginning_of_week_day + 6.days
-  end
-  helper_method :current_end_of_week_day
-
   # grab the first day of the month from the params
   def current_beginning_of_month_day
     @current_beginning_of_month_day ||= begin
@@ -39,6 +33,16 @@ class DashboardController < ApplicationController
   end
   helper_method :current_beginning_of_month_day
 
+  # grab the first day of the year from the params
+  def current_beginning_of_year_day
+    @current_beginning_of_year_day ||= begin
+      if params && params['year']
+        Date.parse("01/01/#{params['year']}")
+      end
+    end
+  end
+  helper_method :current_beginning_of_year_day
+
   def current_uid
     @current_uid ||= begin
       case type
@@ -48,6 +52,8 @@ class DashboardController < ApplicationController
         uid_for_week current_beginning_of_week_day
       when :month
         uid_for_month current_beginning_of_month_day
+      when :year
+        uid_for_year current_beginning_of_year_day
       end
     end
   end
@@ -62,7 +68,9 @@ class DashboardController < ApplicationController
       when :week
         scope.in_week(current_beginning_of_week_day, current_end_of_week_day)
       when :month
-        scope.in_month(current_beginning_of_month_day, current_beginning_of_month_day + 1.month)
+        scope.in_month(current_beginning_of_month_day, current_beginning_of_month_day.end_of_month)
+      when :year
+        scope.in_month(current_beginning_of_year_day, current_beginning_of_year_day.end_of_year)
       end
     end
   end

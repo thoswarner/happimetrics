@@ -14,7 +14,7 @@
   <tbody>
     <% @metrics.each do |metric| %>
       <tr>
-        <td><span class='label'><%= MetricType[metric.metric_type].try(:titleize) %></label></td>
+        <td><span class='label'><%= metric.metric_type %></label></td>
         <td><%= metric.title %></td>
         <td><%= metric.description %></td>
         <td>
