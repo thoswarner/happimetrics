@@ -40,9 +40,14 @@ module DashboardHelper
     year_path(other_year.year)
   end
 
+  def available_metric_types
+    @available_metric_types ||= Metric.all_for_type(type).map(&:metric_types).flatten.uniq
+  end
+
   def metric_values
     @metric_values ||= Metric.all_for_type(type).inject([]) do |arr, metric|
-      arr << metric.metric_values.find_or_create_by_uid(current_uid)
+      metric_type = "#{type}_value"
+      arr << metric.metric_values.find_or_create_by_uid_and_metric_type(current_uid, metric_type)
       arr
     end
   end

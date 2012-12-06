@@ -1,26 +1,37 @@
 class MetricValue < ActiveRecord::Base
-  attr_accessible :description, :uid, :value, :metric_type
+  attr_accessible :description, :uid, :value, :metric_type, :metric_id, :updated_by_user
+
+  attr_accessor :updated_by_user
 
   # associations
   belongs_to :metric
 
+  # callbacks
+  after_update :update_metric_averages!
+
+  def update_metric_averages!
+    MetricCalculation.update_averages_for_metric!(metric) if updated_by_user
+  end
+
   class << self
 
-    def get uid, metric_type
-      begin
-        item = find_by_uid_and_metric_type uid, metric_type
-      rescue
-        return nil
-      end
+    def get attrs = {}
+      conditions = {:uid => attrs[:uid], :metric_type => attrs[:metric_type], :metric_id => attrs[:metric_id]}
+      matches = where(conditions, :limit => 1)
+      item = matches.first if matches.any?
       item
     end
 
-    def update uid, metric_type, value
-      item = get(uid, metric_type)
+    def update attrs = {}
+      item = get(attrs)
       if item
-        item.update_attributes!(:value => value)
+        item.update_attributes!(:value => attrs[:value]) unless item.value == attrs[:value]
       else
-        create!(:uid => uid, :metric_type => metric_type, :value => value)
+        create!(
+          :uid => attrs[:uid], 
+          :metric_type => attrs[:metric_type], 
+          :value => attrs[:value], 
+          :metric_id => attrs[:metric_id])
       end
     end
 

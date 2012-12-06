@@ -3,10 +3,9 @@
     <tr>
       <th>Metric</th>
       <th>Value</th>
-      <th>Daily average</th>
-      <th>Weekly average</th>
-      <th>Monthly average</th>
-      <th>Annual average</th>
+      <% available_metric_types.each do |metric_type| %>
+        <th><%= metric_type.title %> average</th>
+      <% end %>
     </tr>
   </thead>
   <tbody>

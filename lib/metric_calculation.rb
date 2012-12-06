@@ -6,11 +6,21 @@ class MetricCalculation
     def happiness_distribution uid, type
       HappinessValue.names.inject({}) do |hash, happiness_value|
         metric_type = "#{type}_#{happiness_value}_percentage"
-        metric_value = MetricValue.get(uid, metric_type)
+        metric_value = MetricValue.get(:uid => uid, :metric_type => metric_type)
         hash[happiness_value] = metric_value.value if metric_value
         hash
       end
     end
+
+    def update_averages_for_metric! metric
+      metric.metric_types.each do |metric_type|
+        value_metric_type = "#{metric_type.uid}_value"
+        average_metric_type = "average_#{metric_type.uid}"
+        average_for_value = MetricValue.where(:metric_id => metric.id, :metric_type => value_metric_type).average(:value).to_f
+        MetricValue.update(:metric_type => average_metric_type, :value => average_for_value, :metric_id => metric.id)
+      end
+    end
+
 
     # Metric updating
 
@@ -21,6 +31,14 @@ class MetricCalculation
       update_monthly_happiness_distributions!
       update_annual_happiness_distributions!
       update_average_happiness_distributions!
+      update_averages_for_metrics!
+    end
+
+    # update average values for all the metrics
+    def update_averages_for_metrics!
+      Metric.all.each do |metric|
+        update_averages_for_metric!(metric)
+      end
     end
 
     # update average happiness distribution for each type (day, week, month, yeah)
@@ -30,7 +48,7 @@ class MetricCalculation
           metric_type = "#{type}_#{happiness_value}_percentage"
           average_metric_type = "average_#{metric_type}"
           average_for_value = MetricValue.where(:metric_type => metric_type).average(:value).to_f
-          MetricValue.update(nil, average_metric_type, average_for_value)
+          MetricValue.update(:metric_type => average_metric_type, :value => average_for_value)
         end
       end
     end
@@ -80,7 +98,7 @@ class MetricCalculation
         metric_type = "#{type}_#{happiness_value}_percentage"
         matching_entries = entries.select {|entry| entry.happiness_value == happiness_value }
         percentage = (matching_entries.count / entries.length.to_f) * 100
-        MetricValue.update(uid, metric_type, percentage)
+        MetricValue.update(:uid => uid, :metric_type => metric_type, :value => percentage)
       end
     end
 

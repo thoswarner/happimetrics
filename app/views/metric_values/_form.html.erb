@@ -2,6 +2,7 @@
   <td><%= metric_value.metric.title %></td>
   <td>
     <%= simple_form_for metric_value, :remote => true do |f| %>
+      <%= f.input :updated_by_user, :input_html => {:value => true}, :as => :hidden %>
       <%= f.input :value, :wrapper_class => "input-prepend input-append", :label => false do %>
         <%= content_tag :span, metric_value.metric.metric_format(:before).html_safe, :class => "add-on" if metric_value.metric.metric_format(:before) %>
         <%= f.input_field :value, :class => "input-mini metric-value" %>
@@ -9,9 +10,9 @@
       <% end %>
     <% end %>
   </td>
-  <% [:day, :week, :month, :year].each do |type| %>
-  <td>
-
-  </td>
+  <% MetricType.all.each do |metric_type| %>
+    <td>
+      <%= average_metric_value(metric_type.uid, metric_value.metric) if metric_value.metric.metric_types.include?(metric_type) %>
+    </td>
   <% end %>
 </tr>
