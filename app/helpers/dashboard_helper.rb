@@ -41,7 +41,7 @@ module DashboardHelper
   end
 
   def available_metric_types
-    @available_metric_types ||= Metric.all_for_type(type).map(&:metric_types).flatten.uniq
+    @available_metric_types ||= Metric.all_for_type(type).map(&:metric_types).flatten.uniq.sort_by(&:position)
   end
 
   def metric_values
