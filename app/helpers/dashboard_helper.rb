@@ -40,4 +40,11 @@ module DashboardHelper
     year_path(other_year.year)
   end
 
+  def metric_values
+    @metric_values ||= Metric.all_for_type(type).inject([]) do |arr, metric|
+      arr << metric.metric_values.find_or_create_by_uid(current_uid)
+      arr
+    end
+  end
+
 end

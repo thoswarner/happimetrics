@@ -6,9 +6,8 @@ Happimetrics::Application.routes.draw do
 
   # metrics administration
   resources :metrics
-
-  # metric values updating
-  post 'metric_values' => "metric_values#update", :as => "metric_values"
+  # metric values
+  resources :metric_values
 
   # breakdowns
   [:day, :week, :month, :year].each do |type|

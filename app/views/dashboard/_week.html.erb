@@ -1,25 +1,26 @@
 <div class="week">
 
-<%= link_to "Last week", other_week_path(current_beginning_of_week_day, :previous), :class => "btn" if current_beginning_of_week_day %>
-<%= link_to "Next week", other_week_path(current_beginning_of_week_day, :next), :class => "btn" if current_beginning_of_week_day %>
+  <%= link_to "Last week", other_week_path(current_beginning_of_week_day, :previous), :class => "btn" if current_beginning_of_week_day %>
+  <%= link_to "Next week", other_week_path(current_beginning_of_week_day, :next), :class => "btn" if current_beginning_of_week_day %>
 
-<h1><%= current_beginning_of_week_day.strftime("%A, %d %B %Y") %> to <%= current_end_of_week_day.strftime("%A, %d %B %Y") %> </h1>
+  <h1><%= current_beginning_of_week_day.strftime("%A, %d %B %Y") %> to <%= current_beginning_of_week_day.end_of_week.strftime("%A, %d %B %Y") %> </h1>
 
-<%= render 'shared/happiness_distribution', :uid => current_uid, :type => type %>
-<%= render 'shared/average_happiness_distribution', :type => type %>
+  <%= render 'shared/happiness_distribution', :uid => current_uid, :type => type %>
+  <%= render 'shared/average_happiness_distribution', :type => type %>
+  <%= render 'shared/metrics', :type => type %>
 
-<div class='row-fluid'>
-  <div class='span12'>
-    <ul>
-      <% entries.each do |entry| %>
-        <li>
-          <%= entry.entry_date.to_s(:short) %>
-          <%= entry.entered_at.to_s(:time) %>
-          <%= entry.happiness_value %>
-      </li>
-      <% end %>
-    </ul>
+  <div class='row-fluid'>
+    <div class='span12'>
+      <ul>
+        <% entries.each do |entry| %>
+          <li>
+            <%= entry.entry_date.to_s(:short) %>
+            <%= entry.entered_at.to_s(:time) %>
+            <%= entry.happiness_value %>
+        </li>
+        <% end %>
+      </ul>
+    </div>
   </div>
-</div>
 
 </div>

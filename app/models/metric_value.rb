@@ -1,6 +1,9 @@
 class MetricValue < ActiveRecord::Base
   attr_accessible :description, :uid, :value, :metric_type
 
+  # associations
+  belongs_to :metric
+
   class << self
 
     def get uid, metric_type

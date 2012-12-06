@@ -66,7 +66,7 @@ class DashboardController < ApplicationController
       when :day
         scope.on_date(current_day)
       when :week
-        scope.in_week(current_beginning_of_week_day, current_end_of_week_day)
+        scope.in_week(current_beginning_of_week_day, current_beginning_of_week_day.end_of_week)
       when :month
         scope.in_month(current_beginning_of_month_day, current_beginning_of_month_day.end_of_month)
       when :year

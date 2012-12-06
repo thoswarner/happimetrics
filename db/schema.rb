@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121205230618) do
+ActiveRecord::Schema.define(:version => 20121206195540) do
 
   create_table "happiness_entries", :force => true do |t|
     t.integer  "uid"
@@ -49,6 +49,7 @@ ActiveRecord::Schema.define(:version => 20121205230618) do
     t.datetime "created_at",  :null => false
     t.datetime "updated_at",  :null => false
     t.string   "metric_type"
+    t.integer  "metric_id"
   end
 
   add_index "metric_values", ["metric_type"], :name => "index_metric_values_on_metric_type"

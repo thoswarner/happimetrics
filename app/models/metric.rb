@@ -6,6 +6,7 @@ class Metric < ActiveRecord::Base
 
   # associations
   has_and_belongs_to_many :metric_types
+  has_many :metric_values
 
   #validations
   validates :title, :description, :metric_format, :metric_types, :presence => true

@@ -1,33 +1,25 @@
 <div class="day">
 
-<%= link_to "Yesterday", other_day_path(current_day, :previous), :class => "btn" if current_day %>
-<%= link_to "Next day", other_day_path(current_day, :next), :class => "btn" if current_day %>
+  <%= link_to "Yesterday", other_day_path(current_day, :previous), :class => "btn" if current_day %>
+  <%= link_to "Next day", other_day_path(current_day, :next), :class => "btn" if current_day %>
 
-<h1><%= current_day.strftime("%A, %d %B %Y") %></h1>
+  <h1><%= current_day.strftime("%A, %d %B %Y") %></h1>
 
-<!-- dark green: #274C00
-leaf green: #7F9400
-light green: #D4D34D
-v. light gteen: #EDFFA9
-red: #DB4646 
-creamy: #EFDFBB
--->
+  <%= render 'shared/happiness_distribution', :uid => current_uid, :type => type %>
+  <%= render 'shared/average_happiness_distribution', :type => type %>
+  <%= render 'shared/metrics', :type => type %>
 
-<%= render 'shared/happiness_distribution', :uid => current_uid, :type => type %>
-<%= render 'shared/average_happiness_distribution', :type => type %>
-<%= render 'shared/metrics_form', :type => type %>
-
-<div class='row-fluid'>
-  <div class='span12'>
-    <ul>
-      <% entries.each do |entry| %>
-        <li>
-          <%= entry.entered_at.to_s(:time) %>
-          <%= entry.happiness_value %>
-      </li>
-      <% end %>
-    </ul>
+  <div class='row-fluid'>
+    <div class='span12'>
+      <ul>
+        <% entries.each do |entry| %>
+          <li>
+            <%= entry.entered_at.to_s(:time) %>
+            <%= entry.happiness_value %>
+          </li>
+        <% end %>
+      </ul>
+    </div>
   </div>
-</div>
 
 </div>

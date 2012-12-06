@@ -1,5 +1,4 @@
-class MetricValuesController < ApplicationController
-  def update
-    raise params.inspect
-  end
+class MetricValuesController < InheritedResources::Base
+  respond_to :js
+  actions :update
 end

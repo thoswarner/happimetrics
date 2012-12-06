@@ -1,0 +1,17 @@
+<table class='table'>
+  <thead>
+    <tr>
+      <th>Metric</th>
+      <th>Value</th>
+      <th>Daily average</th>
+      <th>Weekly average</th>
+      <th>Monthly average</th>
+      <th>Annual average</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% metric_values.each do |metric_value| %>
+      <%= render 'metric_values/form', :metric_value => metric_value %>
+    <% end %>
+  </tbody>
+</table>
