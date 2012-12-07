@@ -1,0 +1,9 @@
+<ul>
+  <% entries.each do |entry| %>
+    <li>
+      <%= entry.entry_date.to_s(:short) %>
+      <%= entry.entered_at.to_s(:time) %>
+      <%= entry.happiness_value %>
+  </li>
+  <% end %>
+</ul>

@@ -1,26 +1,32 @@
-<div class="month">
+<div class="row-fluid">
 
-  <%= link_to "Last month", other_month_path(current_beginning_of_month_day, :previous), :class => "btn" if current_beginning_of_month_day %>
-  <%= link_to "Next month", other_month_path(current_beginning_of_month_day, :next), :class => "btn" if current_beginning_of_month_day %>
+  <div class='span12'>
 
-  <h1><%= current_beginning_of_month_day.strftime("%B %Y") %></h1>
+    <%= link_to "Last month", other_month_path(current_beginning_of_month_day, :previous), :class => "btn" if current_beginning_of_month_day %>
+    <%= link_to "Next month", other_month_path(current_beginning_of_month_day, :next), :class => "btn" if current_beginning_of_month_day %>
 
-  <%= render 'shared/happiness_distribution', :uid => current_uid, :type => type %>
-  <%= render 'shared/average_happiness_distribution', :type => type %>
-  <%= render 'shared/metrics', :type => type %>
+    <h1><%= current_beginning_of_month_day.strftime("%B %Y") %></h1>
 
-  <div class='row-fluid'>
-    <div class='span12'>
-      <ul>
-        <% entries.each do |entry| %>
-          <li>
-            <%= entry.entry_date.to_s(:short) %>
-            <%= entry.entered_at.to_s(:time) %>
-            <%= entry.happiness_value %>
-        </li>
-        <% end %>
-      </ul>
+    <div class="row-fluid">
+      <div class="span6">
+        <%= render 'shared/metrics', :type => type %>
+      </div>
+      <div class="details span6">
+        <%= render 'shared/happiness_distribution', :uid => current_uid, :type => type %>
+        <br/>
+        <%= render 'shared/average_happiness_distribution', :type => type %>
+      </div>
     </div>
+
+    <% (current_beginning_of_month_day..current_beginning_of_month_day.end_of_month).to_a.each do |date| %>
+      <% next unless date.monday? %>
+      <%= render 'shared/week_overview', :beginning_of_week_day => date %>
+    <% end %>
+
+
+    <% render 'shared/metrics', :type => type %>
+    <% render 'shared/entries', :entries => entries %>
+
   </div>
 
 </div>

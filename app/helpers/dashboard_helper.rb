@@ -52,4 +52,16 @@ module DashboardHelper
     end
   end
 
+  def span date
+    if date.saturday? || date.sunday?
+      "span1"
+    else
+      "span2"
+    end
+  end
+
+  def offset date
+    ""
+  end
+
 end

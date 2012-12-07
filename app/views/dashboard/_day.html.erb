@@ -1,4 +1,4 @@
-<div class="day">
+<div class="day details">
 
   <%= link_to "Yesterday", other_day_path(current_day, :previous), :class => "btn" if current_day %>
   <%= link_to "Next day", other_day_path(current_day, :next), :class => "btn" if current_day %>
@@ -7,7 +7,6 @@
 
   <%= render 'shared/happiness_distribution', :uid => current_uid, :type => type %>
   <%= render 'shared/average_happiness_distribution', :type => type %>
-  <%= render 'shared/metrics', :type => type %>
 
   <div class='row-fluid'>
     <div class='span12'>

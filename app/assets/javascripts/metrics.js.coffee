@@ -4,7 +4,7 @@
 
 jQuery ->
 
-  $("ul.percentage-chart").each ->
+  $("div.details ul.percentage-chart").each ->
     chart = $(this)
     items = $("li", this)
     items.each () ->
@@ -15,4 +15,3 @@ jQuery ->
       item.animate
         width: "#{percentage}%"
       item.addClass happiness_value
-
