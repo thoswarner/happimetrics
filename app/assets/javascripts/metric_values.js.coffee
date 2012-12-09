@@ -3,5 +3,5 @@
 # You can use CoffeeScript in this file: http://jashkenas.github.com/coffee-script/
 
 jQuery ->
-  $("input.metric-value").on "change", (e) ->
+  $(document).on "change", "input.metric-value", (e) ->
     $(this).closest("form").submit();

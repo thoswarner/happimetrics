@@ -1,16 +1,3 @@
-<table class='table'>
-  <thead>
-    <tr>
-      <th>Metric</th>
-      <th>Value</th>
-      <% available_metric_types.each do |metric_type| %>
-        <th><%= metric_type.title %> average</th>
-      <% end %>
-    </tr>
-  </thead>
-  <tbody>
-    <% metric_values.each do |metric_value| %>
-      <%= render 'metric_values/form', :metric_value => metric_value %>
-    <% end %>
-  </tbody>
-</table>
+<% metric_values.each do |metric_value| %>
+  <%= render 'metric_values/form', :metric_value => metric_value %>
+<% end %>

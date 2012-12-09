@@ -1,18 +1,12 @@
-<tr id="metric_value_<%= metric_value.id %>">
-  <td><%= metric_value.metric.title %></td>
-  <td>
-    <%= simple_form_for metric_value, :remote => true do |f| %>
-      <%= f.input :updated_by_user, :input_html => {:value => true}, :as => :hidden %>
-      <%= f.input :value, :wrapper_class => "input-prepend input-append", :label => false do %>
-        <%= content_tag :span, metric_value.metric.metric_format(:before).html_safe, :class => "add-on" if metric_value.metric.metric_format(:before) %>
-        <%= f.input_field :value, :class => "input-mini metric-value" %>
-        <%= content_tag :span, metric_value.metric.metric_format(:after).html_safe, :class => "add-on" if metric_value.metric.metric_format(:after) %>
-      <% end %>
-    <% end %>
-  </td>
-  <% MetricType.all.each do |metric_type| %>
-    <td>
-      <%= average_metric_value(metric_type.uid, metric_value.metric) if metric_value.metric.metric_types.include?(metric_type) %>
-    </td>
+<div class='metric-value-item span2' id="metric_value_<%= metric_value.id %>">
+  <h5><%= metric_value.metric.title %></h5>
+  <%= simple_form_for metric_value, :remote => true do |f| %>
+    <%= hidden_field_tag :current_type, type %>
+    <%= f.input :updated_by_user, :input_html => {:value => true}, :as => :hidden %>
+    <a href="#" data-input-id="metric-value-input-<%= metric_value.id %>" class="metric-input"><%= formatted_metric_value(metric_value) %></a>
+
+    <%= render 'shared/metric_input', :f => f, :metric_value => metric_value %>
+
   <% end %>
-</tr>
+  <%= average_metric_value(type, metric_value.metric) %>
+</div>
