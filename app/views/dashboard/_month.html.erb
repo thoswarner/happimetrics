@@ -5,7 +5,7 @@
     <%= link_to "Last month", other_month_path(current_beginning_of_month_day, :previous), :class => "btn" if current_beginning_of_month_day %>
     <%= link_to "Next month", other_month_path(current_beginning_of_month_day, :next), :class => "btn" if current_beginning_of_month_day %>
 
-    <h1><%= current_beginning_of_month_day.strftime("%B %Y") %></h1>
+    <h1 class='center'><%= current_beginning_of_month_day.strftime("%B %Y") %></h1>
 
     <div class="row-fluid">
       <div class="span6">
@@ -18,14 +18,10 @@
       </div>
     </div>
 
-    <% (current_beginning_of_month_day..current_beginning_of_month_day.end_of_month).to_a.each do |date| %>
-      <% next unless date.monday? %>
-      <%= render 'shared/week_overview', :beginning_of_week_day => date %>
-    <% end %>
-
 
     <% render 'shared/metrics', :type => type %>
-    <% render 'shared/entries', :entries => entries %>
+
+    <%= entries_graph %>
 
   </div>
 

@@ -14,7 +14,5 @@
 //= require jquery_ujs
 //= require twitter/bootstrap
 //= require chosen-jquery
-//= require raphael-min
-//= require g.raphael-min
-//= require g.pie-min
+//= require highcharts
 //= require_tree .

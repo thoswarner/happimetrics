@@ -41,4 +41,7 @@ gem "twitter-bootstrap-rails"
 # Enums
 gem 'active_enum'
 
+# high charts through rails
+gem 'lazy_high_charts'
+
 
