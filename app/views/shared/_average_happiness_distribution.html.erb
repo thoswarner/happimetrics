@@ -1,6 +1,5 @@
-<div class='row-fluid'>
-  <div class='span12'>
-    <ul class='percentage-chart'>
+<div class='percentage-chart-holder'>
+  <ul class='percentage-chart'>
     <% HappinessValue.names.each do |happiness_value| %>
       <li data-percentage="<%= average_happiness_distribution(type, happiness_value) %>" data-happiness-value="<%= happiness_value %>">
         <div class='item-content'>
@@ -8,6 +7,5 @@
         </div>
       </li>
     <% end %>
-    </ul>
-  </div>
+  </ul>
 </div>

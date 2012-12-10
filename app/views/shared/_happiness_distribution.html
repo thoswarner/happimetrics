@@ -1,6 +1,5 @@
-<div class='row-fluid'>
-  <div class='span12'>
-    <ul class='percentage-chart'>
+<div class='percentage-chart-holder'>
+  <ul class='percentage-chart'>
     <% happiness_distribution(uid, type).each_pair do |happiness_value, percentage| %>
       <% next if percentage == 0 %>
       <li data-percentage="<%= percentage %>" data-happiness-value="<%= happiness_value %>">
@@ -9,6 +8,5 @@
         </div>
       </li>
     <% end %>
-    </ul>
-  </div>
+  </ul>
 </div>

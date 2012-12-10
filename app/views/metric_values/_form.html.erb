@@ -1,12 +1,12 @@
-<div class='metric-value-item span2' id="metric_value_<%= metric_value.id %>">
-  <h5><%= metric_value.metric.title %></h5>
+<div class='metric-value-item span3' id="metric_value_<%= metric_value.id %>">
+  <h3><%= metric_value.metric.title %></h3>
   <%= simple_form_for metric_value, :remote => true do |f| %>
     <%= hidden_field_tag :current_type, type %>
     <%= f.input :updated_by_user, :input_html => {:value => true}, :as => :hidden %>
-    <a href="#" data-input-id="metric-value-input-<%= metric_value.id %>" class="metric-input"><%= formatted_metric_value(metric_value) %></a>
+    <!-- <a href="#" data-input-id="metric-value-input-<%= metric_value.id %>" class="metric-input"><%= formatted_metric_value(metric_value) %></a> -->
 
     <%= render 'shared/metric_input', :f => f, :metric_value => metric_value %>
 
   <% end %>
-  <%= average_metric_value(type, metric_value.metric) %>
+  Average monthly: <%= average_metric_value(type, metric_value.metric) %>
 </div>

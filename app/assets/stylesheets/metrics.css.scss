@@ -2,27 +2,35 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
+div.details div.percentage-chart-holder {
+   height: 50px;
+   margin-bottom: 10px;
+}
+
 div.details ul.percentage-chart {
   width: 100%;
   padding: 0;
   margin: 0;
-  clear: both;
-  margin-bottom: 10px;
-  display: none;
+  display: inline-block;
 }
 
 div.details ul.percentage-chart li {
+  font-family: 'Unica One', cursive;
   display: inline-block;
   float: left;
   margin: 0;
   height: 50px
 }
 
+div.details ul.percentage-chart li.clear {
+  clear: both;
+}
+
 div.details ul.percentage-chart li div.item-content {
   line-height: 50px;
-  color: #fff;
+  color: #333;
   font-weight: bold;
-  font-size: 170%;
+  font-size: 20px;
   margin-left: 10px;
 }
 
@@ -31,17 +39,34 @@ div.details ul.percentage-chart li:last {
 }
 
 div.details ul.percentage-chart li.happy {
-  background-color: #274C00;
+  background-color: rgba(163,184,119,0.75);
 }
 
 div.details ul.percentage-chart li.ok {
-  background-color: #D4D34D;
+  background-color: rgba(69,114,167,0.75);
 }
 
 div.details ul.percentage-chart li.sad {
-  background-color: #DB4646;
+  background-color: rgba(170,70,76,0.75);
 }
 
 div.metric-value-item {
-  background-color:rgba(39,76,0,0.5);
+  background-color: #fff;
+  padding: 10px;
+  border-radius: 3px;
+  border: 1px solid #ccc;
+  text-align: center;
+  margin-bottom: 10px;
+}
+
+div.metric-value-item h3 {
+  margin-top: 0;
+}
+
+div.row-metrics {
+  margin-bottom: 10px;
+}
+
+div#entries_graph {
+  margin-top: 20px;
 }

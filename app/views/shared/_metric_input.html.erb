@@ -1,7 +1,8 @@
-<div class="hidden" id="metric-value-input-<%= metric_value.id %>">
+<div id="metric-value-input-<%= metric_value.id %>">
   <%= f.input :value, :wrapper_class => "input-prepend input-append", :label => false do %>
     <%= content_tag :span, metric_value.metric.metric_format(:before).html_safe, :class => "add-on" if metric_value.metric.metric_format(:before) %>
     <%= f.input_field :value, :class => "input-mini metric-value" %>
     <%= content_tag :span, metric_value.metric.metric_format(:after).html_safe, :class => "add-on" if metric_value.metric.metric_format(:after) %>
   <% end %>
+  for this month
 </div>

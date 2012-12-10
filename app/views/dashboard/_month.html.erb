@@ -2,22 +2,44 @@
 
   <div class='span12'>
 
-    <%= link_to "Last month", other_month_path(current_beginning_of_month_day, :previous), :class => "btn" if current_beginning_of_month_day %>
-    <%= link_to "Next month", other_month_path(current_beginning_of_month_day, :next), :class => "btn" if current_beginning_of_month_day %>
-
-    <h1 class='center'><%= current_beginning_of_month_day.strftime("%B %Y") %></h1>
-
-    <div class="row-fluid">
-      <div class="span6">
-        <%= render 'shared/metrics', :type => type %>
+    <div class='row-fluid title-block'>
+      <div class='align-right span4'>
+        <%= link_to "Last month", other_month_path(current_beginning_of_month_day, :previous), :class => "btn" if current_beginning_of_month_day %>
       </div>
-      <div class="details span6">
-        <%= render 'shared/happiness_distribution', :uid => current_uid, :type => type %>
-        <br/>
-        <%= render 'shared/average_happiness_distribution', :type => type %>
+      <div class='center span4'>
+         <h1><%= current_beginning_of_month_day.strftime("%B %Y") %></h1>
+      </div>
+      <div class='align-left span4'>
+        <%= link_to "Next month", other_month_path(current_beginning_of_month_day, :next), :class => "btn" if current_beginning_of_month_day %>
+      </div>      
+    </div>
+
+    <div class="row-metrics row-fluid">
+      <div class="details span12">
+        <div class="row-metrics row-fluid">
+          <div class='span2'>
+            <h4>Happiness for this month</h4>
+          </div>
+          <div class='span10'>
+            <%= render 'shared/happiness_distribution', :uid => current_uid, :type => type %> 
+          </div>
+        </div>
+        <div class="row-metrics row-fluid">
+          <div class='span2'>
+            <h4>Average monthly happiness</h4>
+          </div>
+          <div class='span10'>
+            <%= render 'shared/average_happiness_distribution', :type => type %>
+          </div>
+        </div>
       </div>
     </div>
 
+    <div class="row-metrics row-fluid">
+      <div class="span12">
+        <%= render 'shared/metrics', :type => type %>
+      </div>
+    </div>
 
     <% render 'shared/metrics', :type => type %>
 

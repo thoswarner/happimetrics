@@ -25,3 +25,25 @@ div.overview-day div.day-indicator {
   color: #ccc;
   font-size: 150%;
 }
+
+div.align-left {
+  text-align: left;
+}
+
+div.center {
+  text-align: center;
+}
+
+div.align-right {
+  text-align: right;
+}
+
+div.title-block {
+  border-bottom: 1px solid #D4D4D4;
+  margin-bottom: 20px;
+  padding-bottom: 20px;
+}
+
+div.title-block a.btn {
+  margin-top: 15px;
+}

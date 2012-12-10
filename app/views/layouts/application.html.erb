@@ -39,17 +39,8 @@
     <div class="navbar navbar-fluid-top">
       <div class="navbar-inner">
         <div class="container-fluid">
-          <a class="btn btn-navbar" data-target=".nav-collapse" data-toggle="collapse">
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-          </a>
-          <a class="brand" id="happimetrics-logo" href="#">Happimetrics</a>
-          <div class="container-fluid nav-collapse right">
-            <ul class="nav">
-              <li><%= link_to "Metrics", metrics_path, :class => "btn"  %></li>
-            </ul>
-          </div>
+          <a class="brand" id="happimetrics-logo" href="#"><span class='green'>Happi</span><span class='blue'>metrics</span></a>
+
 
           <!--/.nav-collapse -->
         </div>
@@ -63,10 +54,6 @@
           <%= yield %>
         </div>
       </div><!--/row-->
-
-      <footer>
-        <p>&copy; Company 2012</p>
-      </footer>
 
     </div> <!-- /container -->
 
