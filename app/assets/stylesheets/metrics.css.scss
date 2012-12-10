@@ -43,18 +43,5 @@ div.details ul.percentage-chart li.sad {
 }
 
 div.metric-value-item {
-  background-color: #fff;
-  padding: 10px;
-  -moz-box-shadow: 0 0 6px rgba(0,0,0,0.3);
-  -webkit-box-shadow: 0 0 6px rgba(0,0,0,0.3);
-  box-shadow: 0 0 6px rgba(0,0,0,0.3);
-   -moz-border-radius: 3px;
-  -webkit-border-radius: 3px;
-  -khtml-border-radius: 3px;
-  border-radius: 3px;
-  margin-bottom: 15px;
-}
-
-div.metric-value-item h5 {
-  color: #CCC;
+  background-color:rgba(39,76,0,0.5);
 }

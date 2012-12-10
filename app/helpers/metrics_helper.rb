@@ -22,6 +22,7 @@ module MetricsHelper
 
     # format the value output depending on the metric format
   def formatted_metric_value metric_value
+    return "MISSING" unless metric_value.value
     case metric_value.metric.metric_format(:type)
     when :currency
       number_to_currency(metric_value.value, :unit => metric_value.metric.metric_format(:before))
