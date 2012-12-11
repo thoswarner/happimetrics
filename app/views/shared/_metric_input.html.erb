@@ -4,5 +4,4 @@
     <%= f.input_field :value, :class => "input-mini metric-value" %>
     <%= content_tag :span, metric_value.metric.metric_format(:after).html_safe, :class => "add-on" if metric_value.metric.metric_format(:after) %>
   <% end %>
-  for this month
 </div>

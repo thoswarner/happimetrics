@@ -1,4 +1,4 @@
-<% metric_values.in_groups_of(4, false).each do |metric_values| %>
+<% metric_values.in_groups_of(3, false).each do |metric_values| %>
   <div class='row-fluid'>
     <% metric_values.each do |metric_value| %>
       <%= render 'metric_values/form', :metric_value => metric_value %>

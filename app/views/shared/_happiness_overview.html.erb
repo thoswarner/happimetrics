@@ -1,0 +1,20 @@
+<div class="row-metrics row-fluid">
+  <div class="details span12">
+    <div class="row-metrics row-fluid">
+      <div class='span4'>
+        <h3>Happiness</h3>
+      </div>
+      <div class='span8'>
+        <%= render 'shared/happiness_distribution', :uid => current_uid, :type => type %> 
+      </div>
+    </div>
+    <div class="row-metrics row-fluid">
+      <div class='span4'>
+        <h3>Average monthly happiness</h3>
+      </div>
+      <div class='span8'>
+        <%= render 'shared/average_happiness_distribution', :type => type %>
+      </div>
+    </div>
+  </div>
+</div>

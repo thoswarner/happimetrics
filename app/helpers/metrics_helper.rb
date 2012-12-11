@@ -10,11 +10,11 @@ module MetricsHelper
     metric_value ? metric_value.value : 0
   end
 
-  def average_metric_value type, metric
+  def average_metric_value type, metric, formatted = true
     metric_type = "average_#{type}"
     metric_value = MetricValue.get(:metric_type => metric_type, :metric_id => metric.id)
     if metric_value && metric_value.value != 0.0
-      value = formatted_metric_value(metric_value)
+      value = formatted ? formatted_metric_value(metric_value) : metric_value.value
     else
       value = "--"
     end
@@ -32,6 +32,21 @@ module MetricsHelper
       metric_value.value.round(2)
     end
   end
+
+  def metric_status current_value, average_metric
+    classes = ["metric-status"]
+    if current_value
+      if current_value > average_metric
+        content = "Above average"
+        classes << "above-average"
+      else
+        content = "Below average"
+        classes << "below-average"
+      end
+    end
+    content_div = content_tag(:div, content, :class => classes)
+  end
+
 
 end
 

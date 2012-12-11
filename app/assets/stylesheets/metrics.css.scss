@@ -52,15 +52,45 @@ div.details ul.percentage-chart li.sad {
 
 div.metric-value-item {
   background-color: #fff;
-  padding: 10px;
+  padding: 5px;
   border-radius: 3px;
   border: 1px solid #ccc;
   text-align: center;
   margin-bottom: 10px;
+  font-size: 22px;
+  line-height: 30px;
+}
+
+div.metric-value-item input {
+  font-size: 18px;
+  width: 100px;
+}
+
+div.metric-value-item div.metric-status {
+  padding: 0 15px 0 15px;
+  background-color: #efefef;
+  font-size: 12px;
+  margin-top: 5px;
+  margin-bottom: 10px;
+  float: right;
+  border-radius: 3px;
+}
+
+div.metric-value-item div.metric-status.above-average {
+  color: #fff;
+  background-color: rgba(163,184,119,0.75);
+}
+
+div.metric-value-item div.metric-status.below-average {
+  color: #fff;
+  background-color: rgba(69,114,167,0.75);
 }
 
 div.metric-value-item h3 {
   margin-top: 0;
+  margin-bottom: 0;
+  float: left;
+  margin-left: 5px;
 }
 
 div.row-metrics {
@@ -69,4 +99,17 @@ div.row-metrics {
 
 div#entries_graph {
   margin-top: 20px;
+}
+
+div.border-right {
+  border-right: 1px solid #ccc;
+  padding-right: 5px;
+}
+
+div.border-bottom {
+  border-bottom: 1px solid #ccc;
+}
+
+.clear {
+  clear: both;
 }
