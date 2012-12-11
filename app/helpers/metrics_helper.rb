@@ -33,13 +33,14 @@ module MetricsHelper
     end
   end
 
+  # calculate the status of the metric based upon the given average
   def metric_status current_value, average_metric
     classes = ["metric-status"]
     if current_value
       if current_value > average_metric
         content = "Above average"
         classes << "above-average"
-      else
+      elsid current_value < average_metric
         content = "Below average"
         classes << "below-average"
       end

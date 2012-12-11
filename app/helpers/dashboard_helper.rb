@@ -1,5 +1,18 @@
 module DashboardHelper
 
+  def type_adjective type
+    case type
+    when :day
+      "daily"
+    when :week
+      "weekly"
+    when :month
+      "monthly"
+    when :year
+      "annual"
+    end
+  end
+
   def other_day_path day, direction
     other_day = case direction
     when :previous
@@ -52,58 +65,56 @@ module DashboardHelper
     end
   end
 
-  def span date
-    if date.saturday? || date.sunday?
-      "span1"
-    else
-      "span2"
-    end
-  end
-
-  def offset date
-    ""
-  end
-
-  def all_happiness_distributions
-    @all_happiness_distributions ||= all_days.inject({}) do |hash, date|
+  def all_happiness_distributions_for_chart type
+    @all_happiness_distributions_for_chart ||= categories(type).inject({}) do |hash, date|
       happiness_distributions = MetricCalculation.happiness_distribution(uid_for_day(date), :day)
-      HappinessValue.names.each do |happiness_value|
-        current_value = happiness_distributions[happiness_value].round(2)
-        hash[happiness_value] ? hash[happiness_value] << current_value : hash[happiness_value] = [current_value]
+      if happiness_distributions.any?
+        HappinessValue.names.each do |happiness_value|
+          current_value = happiness_distributions[happiness_value].round(2)
+          item = {:y => current_value}
+          item[:url] = day_path(date.day, date.month, date.year)
+          hash[happiness_value] ? hash[happiness_value] << item : hash[happiness_value] = [item]
+        end
       end
       hash
     end
   end
 
-  def all_days
-    (current_beginning_of_month_day..current_beginning_of_month_day.end_of_month).to_a.select do |date| 
-      !date.saturday? && !date.sunday?
+  def categories type
+    @categories ||= case type
+      when :week
+        (current_beginning_of_week_day..current_beginning_of_week_day.end_of_week).to_a.select do |date| 
+          !date.saturday? && !date.sunday?
+        end
+      when :month
+        (current_beginning_of_month_day..current_beginning_of_month_day.end_of_month).to_a.select do |date| 
+          !date.saturday? && !date.sunday?
+        end
+      when :year
+        (current_beginning_of_year_day..current_beginning_of_year_day.end_of_year).to_a.select do |date| 
+          !date.saturday? && !date.sunday?
+      end
     end
   end
 
-  def entries_graph
-    @h = LazyHighCharts::HighChart.new('graph') do |f|
+  def entries_graph type
+    @graph = LazyHighCharts::HighChart.new('graph') do |f|
       f.options[:chart] = {:defaultSeriesType => "area", :backgroundColor => "#f7f6f4"}
-      f.options[:title] = {:text => "Happiness distribution", :style => {:fontSize => "30px", :fontFamily => "'Unica One', cursive"}}
+      f.options[:title] = {:text => "Happiness distribution for #{type}", :style => {:fontSize => "30px", :fontFamily => "'Unica One', cursive"}}
       f.options[:plotOptions][:area] = {
           stacking: 'percent',
           lineColor: '#ffffff',
           lineWidth: 1,
-          marker: {
-              lineWidth: 1,
-              lineColor: '#ffffff'
-          }
+          marker: { lineWidth: 1, lineColor: '#ffffff'},
       }
+      f.options[:plotOptions][:series] = {:cursor => "pointer", :point => { events: { click: "function() { window.open(this.options.url) }"} } }
       f.options[:colors] = ['#89A54E', '#4572A7', '#AA4643']
       f.options[:legend] = {:borderWidth => 0}
-      f.xAxis!(:categories => all_days.map {|date| date.strftime("%a #{date.day.ordinalize}") }, :tickmarkPlacement => "on", :title => {:enabled => false})
+      f.xAxis!(:categories => categories(type).map {|date| date.strftime("%a #{date.day.ordinalize}") }, :tickmarkPlacement => "on", :title => {:enabled => false})
       f.yAxis(:title => { text: 'Percent' } )
       HappinessValue.names.each do |happiness_value|
-        f.series(:name => happiness_value.titleize, :data => all_happiness_distributions[happiness_value])
+        f.series(:name => happiness_value.titleize, :data => all_happiness_distributions_for_chart(type)[happiness_value])
       end
-    end
-    high_chart("entries_graph", @h) do |c|
-      "options.tooltip.formatter = function() { return '' + this.x +': '+ Highcharts.numberFormat(this.percentage, 1) +'%'; }".html_safe
     end
   end
 

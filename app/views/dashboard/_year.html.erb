@@ -1,26 +1,30 @@
-<div class="year">
+<div class="row-fluid">
+  <div class='span12'>
 
-  <%= link_to "Last year", other_year_path(current_beginning_of_year_day, :previous), :class => "btn" if current_beginning_of_year_day %>
-  <%= link_to "Next year", other_year_path(current_beginning_of_year_day, :next), :class => "btn" if current_beginning_of_year_day %>
+      <div class='row-fluid title-block'>
+        <div class='align-right span4'>
+          <%= link_to "Previous year", other_year_path(current_beginning_of_year_day, :previous), :class => "btn" if current_beginning_of_year_day %>
+        </div>
+        <div class='center span4'>
+           <h2><%= current_beginning_of_year_day.strftime("%Y") %> </h2>
+        </div>
+        <div class='align-left span4'>
+          <%= link_to "Following year", other_year_path(current_beginning_of_year_day, :next), :class => "btn" if current_beginning_of_year_day %>
+        </div>      
+      </div>
 
-  <h1><%= current_beginning_of_year_day.strftime("%Y") %></h1>
+    <% if entries.any? %>
+      <%= render 'shared/happiness_overview' %>
+      <%= render 'shared/metrics', :type => type %>
+      <%= render 'shared/graph', :entries => entries, :type => type %>
+    <% else %>
+      <div class='row-fluid'>
+        <div class='center span12'>
+          <h3>Sorry! There are no happiness entries available for year you have chosen.</h3>
+        </div>    
+      </div>
+    <% end %>
 
-  <%= render 'shared/happiness_distribution', :uid => current_uid, :type => type %>
-  <%= render 'shared/average_happiness_distribution', :type => type %>
-  <%= render 'shared/metrics', :type => type %>
-
-  <div class='row-fluid'>
-    <div class='span12'>
-      <ul>
-        <% entries.each do |entry| %>
-          <li>
-            <%= entry.entry_date.to_s(:short) %>
-            <%= entry.entered_at.to_s(:time) %>
-            <%= entry.happiness_value %>
-        </li>
-        <% end %>
-      </ul>
-    </div>
   </div>
 
 </div>

@@ -1,0 +1,4 @@
+<%= high_chart("entries_graph", entries_graph(type)) do |c| %>
+  <%= "options.tooltip.formatter = function() { return '' + this.x +': '+ Highcharts.numberFormat(this.percentage, 1) +'%'; };".html_safe %>
+  <%= "options.plotOptions.series.point.events.click = function() { window.location = this.options.url }".html_safe %>
+<% end %>

@@ -1,8 +1,12 @@
-<% metric_values.in_groups_of(3, false).each do |metric_values| %>
-  <div class='row-fluid'>
-    <% metric_values.each do |metric_value| %>
-      <%= render 'metric_values/form', :metric_value => metric_value %>
+<div class="row-metrics row-fluid">
+  <div class="span12">
+    <% metric_values.in_groups_of(3, false).each do |metric_values| %>
+      <div class='row-fluid'>
+        <% metric_values.each do |metric_value| %>
+          <%= render 'metric_values/form', :metric_value => metric_value %>
+        <% end %>
+      </div>
+    </div>
     <% end %>
   </div>
 </div>
-<% end %>

@@ -42,7 +42,7 @@ class HappinessEntry < ActiveRecord::Base
       # cleanup the old ones
       self.delete_all
       # instantiate beginning date
-      date = 3.months.ago.to_date
+      date = 36.months.ago.to_date
       # loop through the days till today
       until date == Date.today
         # skip weekends

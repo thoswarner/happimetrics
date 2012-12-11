@@ -9,17 +9,15 @@
   </div>
   <div class='row-fluid'>
     <div class='span6 border-right'>
-      <h4>Month</h4>
+      <h4><%= type.to_s.titleize %></h4>
       <%= simple_form_for metric_value, :remote => true do |f| %>
         <%= hidden_field_tag :current_type, type %>
         <%= f.input :updated_by_user, :input_html => {:value => true}, :as => :hidden %>
-        <!-- <a href="#" data-input-id="metric-value-input-<%= metric_value.id %>" class="metric-input"><%= formatted_metric_value(metric_value) %></a> -->
-
         <%= render 'shared/metric_input', :f => f, :metric_value => metric_value %>
       <% end %>
     </div>
     <div class='span6'>
-      <h4>Average monthly</h4>
+      <h4>Average <%= type_adjective(type) %></h4>
       <%= average_metric_value(type, metric_value.metric) %>
     </div>
   </div>
