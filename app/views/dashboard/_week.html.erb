@@ -6,7 +6,7 @@
           <%= link_to "Previous week", other_week_path(current_beginning_of_week_day, :previous), :class => "btn" if current_beginning_of_week_day %>
         </div>
         <div class='center span4'>
-           <h1><h2><%= current_beginning_of_week_day.strftime("%A, %d %B %Y") %> to <%= current_beginning_of_week_day.end_of_week.strftime("%A, %d %b %Y") %> </h2></h1>
+           <h1><%= week_description(current_beginning_of_week_day, true) %></h1>
         </div>
         <div class='align-left span4'>
           <%= link_to "Following week", other_week_path(current_beginning_of_week_day, :next), :class => "btn" if current_beginning_of_week_day %>

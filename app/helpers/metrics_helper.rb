@@ -40,7 +40,7 @@ module MetricsHelper
       if current_value > average_metric
         content = "Above average"
         classes << "above-average"
-      elsid current_value < average_metric
+      elsif current_value < average_metric
         content = "Below average"
         classes << "below-average"
       end

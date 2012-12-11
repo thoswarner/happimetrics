@@ -4,13 +4,17 @@
 
     <div class='row-fluid title-block'>
       <div class='align-right span4'>
-        <%= link_to "Yesterday", other_day_path(current_day, :previous), :class => "btn" if current_day %>
+        <%= link_to "Previous day", other_day_path(current_day, :previous), :class => "btn" if current_day %>
       </div>
       <div class='center span4'>
-         <h1><%= current_day.strftime("%A, %d %B %Y") %></h1>
+         <h1>
+          <%= current_day.strftime("%A, %d") %>
+          <%= link_to current_beginning_of_month_day.strftime("%B"), month_path(current_beginning_of_month_day.month), :class => "" %>
+          <%= link_to current_beginning_of_month_day.year, year_path(current_beginning_of_month_day.year), :class => "" %>
+        </h1>
       </div>
       <div class='align-left span4'>
-        <%= link_to "Next day", other_day_path(current_day, :next), :class => "btn" if current_day %>
+        <%= link_to "Following day", other_day_path(current_day, :next), :class => "btn" if current_day %>
       </div>      
     </div>
 

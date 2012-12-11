@@ -1,0 +1,9 @@
+<div class='row-fluid title-block'>
+  <div class='center span12'>
+    <h3>Weeks</h3>
+    <% (current_beginning_of_month_day..current_beginning_of_month_day.end_of_month).to_a.each do |date| %>
+      <% next unless date.monday? %>
+      <%= link_to week_description(date), week_path(date.day, date.month, date.year), :class => "btn" %>
+    <% end %>
+  </div>     
+</div>

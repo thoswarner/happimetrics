@@ -3,15 +3,20 @@
 
       <div class='row-fluid title-block'>
         <div class='align-right span4'>
-          <%= link_to "Last month", other_month_path(current_beginning_of_month_day, :previous), :class => "btn" if current_beginning_of_month_day %>
+          <%= link_to "Previous month", other_month_path(current_beginning_of_month_day, :previous), :class => "btn" if current_beginning_of_month_day %>
         </div>
         <div class='center span4'>
-           <h1><%= current_beginning_of_month_day.strftime("%B %Y") %></h1>
+           <h1>
+              <%= current_beginning_of_month_day.strftime("%B") %>
+              <%= link_to current_beginning_of_month_day.year, year_path(current_beginning_of_month_day.year), :class => "" %>
+            </h1>
         </div>
         <div class='align-left span4'>
-          <%= link_to "Next month", other_month_path(current_beginning_of_month_day, :next), :class => "btn" if current_beginning_of_month_day %>
+          <%= link_to "Following month", other_month_path(current_beginning_of_month_day, :next), :class => "btn" if current_beginning_of_month_day %>
         </div>      
       </div>
+
+    <%= render 'shared/weeks' %>
 
     <% if entries.any? %>
       <%= render 'shared/happiness_overview' %>
@@ -24,6 +29,8 @@
         </div>    
       </div>
     <% end %>
+
+
 
   </div>
 
