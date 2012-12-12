@@ -4,14 +4,15 @@
     <blockquote>
       <p>Happimetrics is a tool to help visualise happiness over time, with the added context of custom business metrics added by you. Several different metric formats are supported, including currency, percentage and days, hours and minutes.</p><br/>
       <p>The chief objective of this tool is to allow quick corrolations to be drawn between average happiness percentages and average metric values calculated from data provided by you for a given time period, i.e. day, week, month, or year. As you add data for a time period, you will be able to how the new value compares to the average value for a given metric.</p><br/>
-      <p>The most recent happiness data in this tool is extracted from the happiness data feed of NixonMcInnes. However, in order to demonstrate the longer ranges of time used in this tool, the majority of data has been generated. The generation of this happiness data aims to create mock happiness entries with a similar propensity to certain values as the real NixonMcinness data.</p><br/>
+      <p>The most recent happiness data in this tool is extracted from the happiness data feed of NixonMcInnes. However, in order to demonstrate the longer ranges of time used in this tool, the majority of data has been generated. The generation of this happiness data aims to create mock happiness entries with a similar propensity to certain values as the real NixonMcInnes data.</p><br/>
       <p>A selection of example metrics have been added to help demonstrate the application, but you are free to <%= link_to "add your own", metrics_path %>. Some example data has also been added to show metrics in action. When you are viewing a particular period of time, you can add or update a particular metric value by simply typing the desired value in the provided text box</p>
     </blockquote>
   </div>
   <div class='span4'>
     <h2>Get started</h2>
     <blockquote>
-      <p>View the current month: <%= link_to Date.today.strftime("%B %Y"), month_path(Date.today.month, Date.today.year), :class => "btn" %></p><br/>
+      <% last_month = 1.month.ago.to_date %>
+      <p>View last month: <%= link_to last_month.strftime("%B %Y"), month_path(last_month.month, last_month.year), :class => "btn" %></p><br/>
       <p>View the current year: <%= link_to Date.today.strftime("%Y"), year_path(Date.today.year), :class => "btn" %></p><br/>
       <p>Add some metrics: <%= link_to "Metrics", metrics_path, :class => "btn" %></p><br/>
     </blockquote>
