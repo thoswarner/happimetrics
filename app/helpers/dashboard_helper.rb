@@ -139,6 +139,7 @@ module DashboardHelper
     @graph = LazyHighCharts::HighChart.new('graph') do |f|
       f.options[:chart] = {:defaultSeriesType => "area", :backgroundColor => "#f7f6f4"}
       f.options[:title] = {:text => "Happiness distribution for #{type}", :style => {:fontSize => "30px", :fontFamily => "'Unica One', cursive"}}
+      f.options[:subtitle] = {:text => "Click on a data point to drill down to further metric data", :y => 50, :style => {:fontSize => "14px", :fontWeight => "bold" }}
       f.options[:plotOptions][:area] = {
           stacking: 'percent',
           lineColor: '#ffffff',

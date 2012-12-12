@@ -2,6 +2,10 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
+div#main-container {
+  display: none;
+}
+
 div.overview-day {
   background-color: #fff;
   padding: 10px;
@@ -46,4 +50,23 @@ div.title-block {
 
 div.title-block a.btn {
   margin-top: 15px;
+}
+
+div.week-block {
+  border-bottom: 1px solid #D4D4D4;
+  margin-bottom: 20px;
+  padding-bottom: 20px;
+}
+
+div.week-block div#weeks-title {
+  display: inline-block;
+  font-family: 'Unica One', cursive;
+  font-size: 20px;
+  margin-right: 10px;
+
+}
+
+div.week-block div#weeks-title span {
+  line-height: 8px;
+  display: block;
 }
