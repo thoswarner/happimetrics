@@ -71,14 +71,14 @@ class HappinessEntry < ActiveRecord::Base
     end
 
     def update!
-      logger.info "Accessing entries data..."
+      puts "Accessing entries data..."
       uri = URI.parse("http://spreadsheets.google.com/feeds/list/0AnXMCsqfd3RQdHJkVTc4cjduTE95Q0lFYTA5b3ZTUmc/od6/public/values?alt=json")
       response = Net::HTTP.get_response(uri)
       if response.code == "200"
-        logger.info "Entries data received."
+        puts "Entries data received."
         data = JSON.parse(response.body)
         last_entry = self.last
-        logger.info "Parsing entries data..."
+        puts "Parsing entries data..."
         entries = data["feed"]["entry"].inject([]) do |arr, entry|
           entry_date = Date.strptime(entry["gsx$date"]["$t"], "%m/%d/%Y")
           entry_time = DateTime.parse("#{entry_date} #{entry["gsx$time"]["$t"]}")
@@ -92,19 +92,19 @@ class HappinessEntry < ActiveRecord::Base
           end
           arr
         end
-        logger.info "Number of new entries found: #{entries.size}"
+        puts "Number of new entries found: #{entries.size}"
         if entries.any?
-          logger.info "Adding new entries"
+          puts "Adding new entries"
           entries.each do |entry|
             uid = entry[:entry_time].to_i
             self.create!(:uid => uid, :entry_date => entry[:entry_date], :entry_time => entry[:entry_time], :happiness_value => entry[:happiness_value])
           end
-          logger.info "Entries update complete!"
+          puts "Entries update complete!"
         else
-          logger.info "Nothing to do here..."
+          puts "Nothing to do here..."
         end
       else
-        logger.info "There was a problem accessing the entries data. Ending update process..."
+        puts "There was a problem accessing the entries data. Ending update process..."
       end
     end
 

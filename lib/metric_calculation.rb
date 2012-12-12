@@ -26,12 +26,14 @@ class MetricCalculation
 
     # calculate metric values in bulk (background task)
     def update_metric_values!
+      puts "Updating metric values..."
       update_daily_happiness_distributions!
       update_weekly_happiness_distributions!
       update_monthly_happiness_distributions!
       update_annual_happiness_distributions!
       update_average_happiness_distributions!
       update_averages_for_metrics!
+      puts "Done updating metric values."
     end
 
     # update average values for all the metrics
