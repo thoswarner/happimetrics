@@ -59,9 +59,9 @@ ActiveRecord::Schema.define(:version => 20121206231333) do
 
   create_table "metrics", :force => true do |t|
     t.string   "title"
-    t.text     "description",   :limit => 255
-    t.datetime "created_at",                   :null => false
-    t.datetime "updated_at",                   :null => false
+    t.text     "description"
+    t.datetime "created_at",    :null => false
+    t.datetime "updated_at",    :null => false
     t.integer  "metric_type"
     t.integer  "metric_format"
   end
