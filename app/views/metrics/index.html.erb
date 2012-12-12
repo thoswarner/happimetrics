@@ -26,12 +26,7 @@
         <td><%= metric.description %></td>
         <td>
           <%= link_to t('.edit', :default => t("helpers.links.edit")),
-                      edit_metric_path(metric), :class => 'btn btn-mini' %>
-          <%= link_to t('.destroy', :default => t("helpers.links.destroy")),
-                      metric_path(metric),
-                      :method => :delete,
-                      :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) },
-                      :class => 'btn btn-mini btn-danger' %>
+                      edit_metric_path(metric), :class => 'btn' %>
         </td>
       </tr>
     <% end %>
@@ -40,4 +35,4 @@
 
 <%= link_to t('.new', :default => t("helpers.metrics.links.new")),
             new_metric_path,
-            :class => 'btn btn-primary' %>
+            :class => 'btn' %>
