@@ -14,6 +14,7 @@
       </div>
 
     <% if entries.any? %>
+      <%= render 'shared/key' %>
       <%= render 'shared/happiness_overview' %>
       <%= render 'shared/metrics', :type => type %>
       <%= render 'shared/graph', :entries => entries, :type => type %>

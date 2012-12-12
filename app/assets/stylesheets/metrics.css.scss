@@ -113,3 +113,36 @@ div.border-bottom {
 .clear {
   clear: both;
 }
+
+div.key {
+  display: inline-block;
+  padding: 2px;
+  width: 40px;
+  border-radius: 2px;
+  font-size: 11px;
+  color: #fff;
+  text-align: center;
+}
+
+div.key.title {
+  color: #333;
+}
+
+div.key.happy {
+  background-color: rgba(163,184,119,0.75);
+}
+
+div.key.ok {
+  background-color: rgba(69,114,167,0.75);
+}
+
+div.key.sad {
+  background-color: rgba(170,70,76,0.75);
+}
+
+div.key-block {
+  margin-top: -15px;
+  padding-top: 0;
+  padding-bottom: 0;
+  margin-bottom: 2px;
+}

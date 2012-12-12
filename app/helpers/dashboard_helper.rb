@@ -146,7 +146,7 @@ module DashboardHelper
       }
       f.options[:plotOptions][:series] = {:cursor => "pointer", :point => { events: { click: "function() { window.open(this.options.url) }"} } }
       f.options[:colors] = ['#89A54E', '#4572A7', '#AA4643']
-      f.options[:legend] = {:borderWidth => 0}
+      f.options[:legend] = {:borderWidth => 0, :enabled => false}
       f.xAxis!(:categories => category_names(type), :tickmarkPlacement => "on", 
         :title => {:enabled => false}, :labels => {:rotation => 90, :y => 40} )
       f.yAxis(:title => { text: 'Percent' })
