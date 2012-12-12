@@ -1,5 +1,8 @@
+require "net/http"
+require "uri"
+
 class HappinessEntry < ActiveRecord::Base
-  default_scope order('entry_date, entry_time ASC')
+  default_scope order('entry_date ASC')
 
   # attributes
   attr_accessible :uid, :entry_date, :entry_time, :happiness_value
@@ -42,9 +45,10 @@ class HappinessEntry < ActiveRecord::Base
       # cleanup the old ones
       self.delete_all
       # instantiate beginning date
-      date = 36.months.ago.to_date
+      date = 13.months.ago.to_date
       # loop through the days till today
-      until date == Date.today
+      cutoff_date = Date.parse("23/11/2012")
+      until date == cutoff_date
         # skip weekends
         unless (date.saturday? || date.sunday?)
           # choose a random number of entries between 3 and 25
@@ -65,6 +69,45 @@ class HappinessEntry < ActiveRecord::Base
         date = date + 1.day
       end
     end
+
+    def update!
+      logger.info "Accessing entries data..."
+      uri = URI.parse("http://spreadsheets.google.com/feeds/list/0AnXMCsqfd3RQdHJkVTc4cjduTE95Q0lFYTA5b3ZTUmc/od6/public/values?alt=json")
+      response = Net::HTTP.get_response(uri)
+      if response.code == "200"
+        logger.info "Entries data received."
+        data = JSON.parse(response.body)
+        last_entry = self.last
+        logger.info "Parsing entries data..."
+        entries = data["feed"]["entry"].inject([]) do |arr, entry|
+          entry_date = Date.strptime(entry["gsx$date"]["$t"], "%m/%d/%Y")
+          entry_time = DateTime.parse("#{entry_date} #{entry["gsx$time"]["$t"]}")
+          happiness_value = HappinessValue[entry["gsx$status"]["$t"].downcase]
+          valid_entry = true
+          if last_entry
+            valid_entry = (entry_date > last_entry.entry_date && entry_time > last_entry.entry_time)
+          end
+          if valid_entry
+            arr << {:entry_date => entry_date, :entry_time => entry_time, :happiness_value => happiness_value}
+          end
+          arr
+        end
+        logger.info "Number of new entries found: #{entries.size}"
+        if entries.any?
+          logger.info "Adding new entries"
+          entries.each do |entry|
+            uid = entry[:entry_time].to_i
+            self.create!(:uid => uid, :entry_date => entry[:entry_date], :entry_time => entry[:entry_time], :happiness_value => entry[:happiness_value])
+          end
+          logger.info "Entries update complete!"
+        else
+          logger.info "Nothing to do here..."
+        end
+      else
+        logger.info "There was a problem accessing the entries data. Ending update process..."
+      end
+    end
+
   end
 
 end

@@ -1,38 +1,50 @@
-<%- model_class = Metric -%>
-<div class="page-header">
-  <h1><%=t '.title', :default => model_class.model_name.human.pluralize %></h1>
-  <blockquote>
-    <p>Metrics give you an opportunity to set up pre-defined measures relevant to the business. The values for metrics can then be populated daily, weekly, monthly or annually. As you build up more data, you will be able to see average values for your metrics across the various time periods. Ever wondered if the number of biscuits purchased a week corrolates with the amount of happiness?</p>
-  </blockquote>
-</div>
-<table class="table table-striped">
-  <thead>
-    <tr>
-      <th><%= model_class.human_attribute_name(:metric_type) %></th>
-      <th><%= model_class.human_attribute_name(:title) %></th>
-      <th><%= model_class.human_attribute_name(:description) %></th>
-      <th><%=t '.actions', :default => t("helpers.actions") %></th>
-    </tr>
-  </thead>
-  <tbody>
-    <% @metrics.each do |metric| %>
-      <tr>
-        <td>
-          <% metric.metric_types.each do |metric_type| %>
-            <span class='label'><%= metric_type.title %></span> 
+<div class='row-fluid'>
+  <div class='span10 offset1'>
+    <%- model_class = Metric -%>
+    <div class="page-header center">
+      <h1><%=t '.title', :default => model_class.model_name.human.pluralize %></h1>
+      <blockquote>
+        <p>Metrics give you an opportunity to set up pre-defined measures relevant to the business. The values for metrics can then be populated daily, weekly, monthly or annually. As you build up more data, you will be able to see average values for your metrics across the various time periods. Ever wondered if the number of teas made a week effects happiness?</p>
+      </blockquote>
+    </div>
+    <% if @metrics.any? %>
+      <table class="table table-striped">
+        <thead>
+          <tr>
+            <th><%= model_class.human_attribute_name(:title) %></th>
+            <th><%= model_class.human_attribute_name(:description) %></th>
+            <th>Availability</th>
+            <th>Format</th>
+            <th><%=t '.actions', :default => t("helpers.actions") %></th>
+          </tr>
+        </thead>
+        <tbody>
+          <% @metrics.each do |metric| %>
+            <tr>
+              <td><%= metric.title %></td>
+              <td><%= metric.description %></td>
+              <td>
+                <% metric.metric_types.each do |metric_type| %>
+                  <span class='label'><%= metric_type.title %></span> 
+                <% end %>
+              </td>
+              <td>
+                <%= metric.metric_format %>
+              </td>
+              <td>
+                <%= link_to t('.edit', :default => t("helpers.links.edit")),
+                            edit_metric_path(metric), :class => 'btn' %>
+              </td>
+            </tr>
           <% end %>
-        </td>
-        <td><%= metric.title %></td>
-        <td><%= metric.description %></td>
-        <td>
-          <%= link_to t('.edit', :default => t("helpers.links.edit")),
-                      edit_metric_path(metric), :class => 'btn' %>
-        </td>
-      </tr>
+        </tbody>
+      </table>
+    <% else %>
+      <h3>There are no metrics added yet.</h3>
     <% end %>
-  </tbody>
-</table>
 
-<%= link_to t('.new', :default => t("helpers.metrics.links.new")),
-            new_metric_path,
-            :class => 'btn' %>
+    <%= link_to t('.new', :default => t("helpers.metrics.links.new")),
+                new_metric_path,
+                :class => 'btn' %>
+  </div>
+</div>

@@ -1,7 +1,4 @@
-# This file should contain all the record creation needed to seed the database with its default values.
-# The data can then be loaded with the rake db:seed (or created alongside the db with db:setup).
-#
-# Examples:
-#
-#   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
-#   Mayor.create(name: 'Emanuel', city: cities.first)
+MetricType.create :title => "Daily", :uid => :day, :position => 1
+MetricType.create :title => "Weekly", :uid => :week, :position => 2
+MetricType.create :title => "Monthly", :uid => :month, :position => 3
+MetricType.create :title => "Annually", :uid => :year, :position => 4

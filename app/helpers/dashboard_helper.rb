@@ -94,13 +94,11 @@ module DashboardHelper
       uid = type == :year ? uid_for_month(date) : uid_for_day(date)
       distribution_type = type == :year ? :month : :day
       happiness_distributions = MetricCalculation.happiness_distribution(uid, distribution_type)
-      if happiness_distributions.any?
-        HappinessValue.names.each do |happiness_value|
-          current_value = happiness_distributions[happiness_value].round(2)
-          item = {:y => current_value}
-          item[:url] = type == :year ? month_path(date.month, date.year) : day_path(date.day, date.month, date.year)
-          hash[happiness_value] ? hash[happiness_value] << item : hash[happiness_value] = [item]
-        end
+      HappinessValue.names.each do |happiness_value|
+        current_value = happiness_distributions[happiness_value] ? happiness_distributions[happiness_value].round(2) : 0.0
+        item = {:y => current_value}
+        item[:url] = type == :year ? month_path(date.month, date.year) : day_path(date.day, date.month, date.year)
+        hash[happiness_value] ? hash[happiness_value] << item : hash[happiness_value] = [item]
       end
       hash
     end
