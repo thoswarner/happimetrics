@@ -64,7 +64,7 @@ class DashboardController < ApplicationController
       scope = HappinessEntry
       case type
       when :day
-        scope.on_date(current_day)
+        scope.on_date(current_day).order("entry_time asc")
       when :week
         scope.in_week(current_beginning_of_week_day, current_beginning_of_week_day.end_of_week)
       when :month

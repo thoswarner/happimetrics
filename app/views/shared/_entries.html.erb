@@ -1,7 +1,12 @@
-<ul class='inline entries'>
-  <% entries.each do |entry| %>
-    <li class="<%= entry.happiness_value %>">
-      <div class='time'><%= entry.entered_at.to_s(:time) %></div>
-  </li>
-  <% end %>
-</ul>
+<div class='row-fluid'>
+  <div class='span12 center'>
+    <h3>Happiness entries</h3>
+    <ul class='inline entries'>
+      <% entries.each do |entry| %>
+        <li class="<%= entry.happiness_value %>">
+          <div class='time'><%= entry.entered_at.to_s(:time) %></div>
+      </li>
+      <% end %>
+    </ul>
+  </div>
+</div>
