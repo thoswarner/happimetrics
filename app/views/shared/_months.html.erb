@@ -1,0 +1,9 @@
+<div class='row-fluid week-block'>
+  <div class='center span12'>
+    <div id="weeks-title"><span>Months</span></div>
+    <% (current_beginning_of_year_day..current_beginning_of_year_day.end_of_year).to_a.each do |date| %>
+      <% next unless date.day == 1 %>
+      <%= link_to date.strftime("%B"), month_path(date.month, date.year), :class => "btn" %>
+    <% end %>
+  </div>     
+</div>
