@@ -80,3 +80,32 @@ a#metrics-button {
 div.no-entries {
   margin-bottom: 100px;
 }
+
+ul.entries li {
+  display: inline-block;
+  padding: 10px 5px 10px 5px;
+  width: 95px;
+  border-radius: 2px;
+  font-size: 11px;
+  color: #fff;
+  text-align: center;
+  margin-bottom: 5px; 
+}
+
+ul.entries li div.time {
+  font-size: 14px;
+}
+
+
+ul.entries li.happy {
+  background-color: rgba(163,184,119,0.75);
+}
+
+ul.entries li.ok {
+  background-color: rgba(69,114,167,0.75);
+}
+
+ul.entries li.sad {
+  background-color: rgba(170,70,76,0.75);
+}
+

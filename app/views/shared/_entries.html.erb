@@ -1,9 +1,7 @@
-<ul>
+<ul class='inline entries'>
   <% entries.each do |entry| %>
-    <li>
-      <%= entry.entry_date.to_s(:short) %>
-      <%= entry.entered_at.to_s(:time) %>
-      <%= entry.happiness_value %>
+    <li class="<%= entry.happiness_value %>">
+      <div class='time'><%= entry.entered_at.to_s(:time) %></div>
   </li>
   <% end %>
 </ul>
