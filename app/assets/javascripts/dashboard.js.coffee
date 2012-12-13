@@ -4,4 +4,6 @@
 
 jQuery ->
   $("#main-container").fadeIn 500
+  $("i[rel='tooltip']").tooltip
+    placement: 'right'
 

@@ -4,6 +4,7 @@
       <% average = average_metric_value(type, metric_value.metric, false) %>
       <%= metric_status(metric_value.value, average) if metric_value.value && average %>
       <h3><%= metric_value.metric.title %></h3>
+      <i rel="tooltip" title="<%= metric_value.metric.description %>" class="icon-info-sign"></i>
       <div class='clear'></div>
     </div>
   </div>

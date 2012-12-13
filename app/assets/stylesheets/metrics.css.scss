@@ -66,6 +66,12 @@ div.metric-value-item input {
   width: 100px;
 }
 
+div.metric-value-item i {
+  margin-left: 5px;
+  margin-top: 12px;
+  float: left;
+}
+
 div.metric-value-item div.metric-status {
   padding: 0 15px 0 15px;
   background-color: #efefef;
